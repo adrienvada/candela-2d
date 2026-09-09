@@ -213,6 +213,18 @@ html.js .vu .barre-trait { width: var(--w); }
 .barre-detail { font-family: var(--data); font-size: 0.66rem; color: var(--dim); padding-left: 0.45rem; }
 .figure-note { font-size: 0.86rem; color: var(--dim); max-width: 54ch; margin-top: 0.8rem; }
 
+/* --- Les dix classes ---------------------------------------------------------
+   Une classe se lit ici à ce qu'elle ÉCHANGE, pas à ses dégâts : c'est l'angle
+   de toute la page, et le seul qui distingue ces dix-là entre elles. */
+.classes { display: grid; grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr)); gap: 1.3rem var(--gap); margin-top: 2rem; }
+.classe { padding-top: 0.85rem; border-top: 2px solid var(--trait-bas); display: flex; flex-direction: column; gap: 0.3rem; }
+.classe-nom { font-family: var(--display); font-weight: 800; font-size: 1.3rem; text-transform: uppercase; letter-spacing: 0.03em; line-height: 1; }
+.classe-arme { font-family: var(--data); font-size: 0.65rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--ambre); }
+.classe p { color: var(--dim); font-size: 0.87rem; margin-top: 0.3rem; }
+/* Les deux qui portent plus loin qu'elles ne voient se signalent : c'est la
+   seule propriété de ce tableau qui change la façon de jouer CONTRE elles. */
+.classe.loin { border-top-color: var(--ambre); }
+
 /* =========================================================================
    L'ÉCHELLE DES RANGS
    ========================================================================= */
@@ -332,7 +344,7 @@ html.js .vu .barre-trait { width: var(--w); }
     <div class="dedans">
       <div class="case case-large anim">
         <p class="recitatif">Jouer</p>
-        <div class="dl-tete"><h2>Télécharger</h2><span class="tampon">v0.3.1</span></div>
+        <div class="dl-tete"><h2>Télécharger</h2><span class="tampon">v0.4.0</span></div>
         <div class="plateformes">
           <a class="plateforme" href="https://github.com/adrienvada/Candela-2D---Godot/releases/latest/download/Candela-macos.zip">
             <img class="glyphe" src="images/icone_macos.png" alt="">
@@ -359,7 +371,7 @@ html.js .vu .barre-trait { width: var(--w); }
           </div>
           <p class="installe-fin">C’est fini. Les fois suivantes, Candela s’ouvre d’un simple double-clic, et se met à jour tout seul.</p>
         </div>
-        <p class="dl-note">Les deux liens pointent vers la <strong>dernière version publiée</strong> : ils restent valables à chaque sortie. La 0.3.1 est sortie le 9 septembre 2026.</p>
+        <p class="dl-note">Les deux liens pointent vers la <strong>dernière version publiée</strong> : ils restent valables à chaque sortie. La 0.4.0 est sortie le 9 septembre 2026.</p>
       </div>
     </div>
   </section>
@@ -384,23 +396,41 @@ html.js .vu .barre-trait { width: var(--w); }
   <section class="scene" data-scene="4">
     <div class="dedans">
       <div class="case case-large anim">
-        <p class="recitatif">Quatre armes</p>
-        <h2>Choisir une arme,<br>c’est choisir<br>comment on se trahit</h2>
+        <p class="recitatif">Dix classes</p>
+        <h2>Choisir une classe,<br>c’est choisir<br>comment on se trahit</h2>
         <div class="prose">
-          <p>Chaque arme porte sa propre torche. Elles ne diffèrent pas seulement par les dégâts : elles diffèrent par la quantité de vous-même qu’elles montrent au reste de la carte.</p>
+          <p>Chaque classe porte son arme, sa torche et son gadget. Elles ne diffèrent pas d’abord par les dégâts : elles diffèrent par la quantité de vous-même qu’elles montrent au reste de la carte.</p>
         </div>
         <figure class="figure">
           <div class="figure-titre">Portée du faisceau, en largeurs d’écran</div>
           <div class="figure-sous">Chaque joueur voit 480 unités devant lui. Au-delà, la torche allume quelque chose que son porteur ne voit pas.</div>
           <div class="trace">
             <div class="seuil" aria-hidden="true"></div>
-            <div class="barre"><div class="barre-nom">Pompe</div><div class="barre-piste"><div class="barre-trait" style="--w:28.3%"></div><div class="barre-val" style="left:28.3%">0,53 <span class="barre-detail">60° · large et court</span></div></div></div>
-            <div class="barre"><div class="barre-nom">Pistolet</div><div class="barre-piste"><div class="barre-trait" style="--w:45.5%"></div><div class="barre-val" style="left:45.5%">0,85 <span class="barre-detail">35° · polyvalent</span></div></div></div>
-            <div class="barre"><div class="barre-nom">Fusil</div><div class="barre-piste"><div class="barre-trait" style="--w:51.3%"></div><div class="barre-val" style="left:51.3%">0,96 <span class="barre-detail">précis</span></div></div></div>
-            <div class="barre"><div class="barre-nom">Arbalète</div><div class="barre-piste"><div class="barre-trait" style="--w:100%"></div><div class="barre-val" style="left:100%; transform:translate(-100%,-50%); padding-right:0.55rem; padding-left:0; color:var(--noir); font-weight:500;">1,87</div></div></div>
+            <div class="barre"><div class="barre-nom">Terrassier</div><div class="barre-piste"><div class="barre-trait" style="--w:28.3%"></div><div class="barre-val" style="left:28.3%">0,53 <span class="barre-detail">pompe</span></div></div></div>
+            <div class="barre"><div class="barre-nom">Allumeur</div><div class="barre-piste"><div class="barre-trait" style="--w:34.2%"></div><div class="barre-val" style="left:34.2%">0,64 <span class="barre-detail">carabine double</span></div></div></div>
+            <div class="barre"><div class="barre-nom">Occulteur</div><div class="barre-piste"><div class="barre-trait" style="--w:36.9%"></div><div class="barre-val" style="left:36.9%">0,69 <span class="barre-detail">pistolet-mitrailleur</span></div></div></div>
+            <div class="barre"><div class="barre-nom">Incendiaire</div><div class="barre-piste"><div class="barre-trait" style="--w:40.1%"></div><div class="barre-val" style="left:40.1%">0,75 <span class="barre-detail">fusil de détresse</span></div></div></div>
+            <div class="barre"><div class="barre-nom">Spectre</div><div class="barre-piste"><div class="barre-trait" style="--w:40.1%"></div><div class="barre-val" style="left:40.1%">0,75 <span class="barre-detail">pistolet silencieux</span></div></div></div>
+            <div class="barre"><div class="barre-nom">Fumiste</div><div class="barre-piste"><div class="barre-trait" style="--w:42.8%"></div><div class="barre-val" style="left:42.8%">0,80 <span class="barre-detail">pistolet lourd</span></div></div></div>
+            <div class="barre"><div class="barre-nom">Parasite</div><div class="barre-piste"><div class="barre-trait" style="--w:45.5%"></div><div class="barre-val" style="left:45.5%">0,85 <span class="barre-detail">pistolet</span></div></div></div>
+            <div class="barre"><div class="barre-nom">Illusionniste</div><div class="barre-piste"><div class="barre-trait" style="--w:51.3%"></div><div class="barre-val" style="left:51.3%">0,96 <span class="barre-detail">fusil</span></div></div></div>
+            <div class="barre"><div class="barre-nom">Sentinelle</div><div class="barre-piste"><div class="barre-trait" style="--w:74.3%"></div><div class="barre-val" style="left:74.3%">1,39 <span class="barre-detail">fusil à verrou</span></div></div></div>
+            <div class="barre"><div class="barre-nom">Braconnier</div><div class="barre-piste"><div class="barre-trait" style="--w:100.0%"></div><div class="barre-val" style="left:100%; transform:translate(-100%,-50%); padding-right:0.55rem; padding-left:0; color:var(--noir); font-weight:500;">1,87</div></div></div>
           </div>
-          <p class="figure-note">L’arbalète est la seule à éclairer au-delà de ce que son porteur peut voir : un fil de lumière de 5°, silencieux, qui atteint des endroits dont il ne recevra jamais l’image.</p>
+          <p class="figure-note"><strong>Deux classes éclairent plus loin qu’elles ne voient</strong>, et elles ne le paient pas de la même façon : le Braconnier paie en <strong>silence</strong> — son arbalète n’émet aucun flash — et la Sentinelle paie en <strong>temps</strong>, près d’une seconde entre deux coups.</p>
         </figure>
+        <div class="classes">
+          <div class="classe"><span class="classe-nom">Le Parasite</span><span class="classe-arme">pistolet</span><p>Tire vite et voit large, mais chaque coup le désigne. Il ne se cache pas : il corrompt la lampe des autres.</p></div>
+          <div class="classe"><span class="classe-nom">Le Fumiste</span><span class="classe-arme">pistolet lourd</span><p>Trois balles lourdes et un rideau de suie. Il ne disparaît pas, il devient <em>quelqu’un</em> — on voit qu’il y a un corps, jamais lequel.</p></div>
+          <div class="classe"><span class="classe-nom">L’Illusionniste</span><span class="classe-arme">fusil</span><p>Un faisceau fin et net, et un corps posé au sol qui n’est pas le sien. Ce qu’il révèle de lui est faux.</p></div>
+          <div class="classe loin"><span class="classe-nom">Le Braconnier</span><span class="classe-arme">arbalète</span><p>Il voit deux fois plus loin que l’écran et son arme ne fait aucune lumière — mais il reste immobile après chaque tir. Il paie sa discrétion en <strong>temps</strong>.</p></div>
+          <div class="classe"><span class="classe-nom">Le Terrassier</span><span class="classe-arme">pompe</span><p>Le faisceau le plus large du jeu : il voit tout autour de lui et rien devant. Il se signale en permanence, et lève la poussière pour que ça ne serve à personne.</p></div>
+          <div class="classe"><span class="classe-nom">L’Incendiaire</span><span class="classe-arme">fusil de détresse</span><p>Deux cartouches, deux fusées, un sol qu’on ne traverse plus. Il ne cherche pas à être invisible : il rend le terrain inhabitable.</p></div>
+          <div class="classe loin"><span class="classe-nom">La Sentinelle</span><span class="classe-arme">fusil à verrou</span><p>Elle voit plus loin que tout le monde sauf le Braconnier, et met près d’une seconde entre deux tirs. Elle ne cherche pas — elle relit les traces de qui est passé.</p></div>
+          <div class="classe"><span class="classe-nom">L’Occulteur</span><span class="classe-arme">pistolet-mitrailleur</span><p>Une rafale courte, un flash faible, et une découpe d’acier qui projette l’ombre d’un homme absent. Il ment avec <strong>l’obscurité</strong>.</p></div>
+          <div class="classe"><span class="classe-nom">L’Allumeur</span><span class="classe-arme">carabine double</span><p>La lumière maximale : deux fusées, une mine au magnésium, aucune ombre où se mettre. Il se montre pour que personne ne puisse se cacher.</p></div>
+          <div class="classe"><span class="classe-nom">Le Spectre</span><span class="classe-arme">pistolet silencieux</span><p>Aucune fusée, aucun flash, une arme silencieuse — et une bâche qui arrête la lumière sans arrêter les balles. Il ne révèle rien, et n’a presque rien pour tuer.</p></div>
+        </div>
       </div>
     </div>
   </section>
@@ -415,18 +445,18 @@ html.js .vu .barre-trait { width: var(--w); }
           <p>Le classement se compte en ELO et se nomme en lumière. On commence sans rien voir ; on finit par porter le nom de l’unité qui mesure l’intensité d’une bougie.</p>
         </div>
         <div class="echelle">
-          <div class="rang"><span class="rang-num">01</span><span class="rang-nom" style="color:#5f6468">Aveugle</span><span class="rang-arme">Pistolet</span></div>
-          <div class="rang"><span class="rang-num">02</span><span class="rang-nom" style="color:#6e6a60">Braise</span><span class="rang-arme">Fusil</span></div>
-          <div class="rang"><span class="rang-num">03</span><span class="rang-nom" style="color:#7d7059">Bougie</span><span class="rang-arme">Pompe</span></div>
-          <div class="rang"><span class="rang-num">04</span><span class="rang-nom" style="color:#8d7855">Lanterne</span><span class="rang-arme">Arbalète</span></div>
-          <div class="rang"><span class="rang-num">05</span><span class="rang-nom" style="color:#9d8153">Torche</span><span class="rang-arme attente">à venir</span></div>
-          <div class="rang"><span class="rang-num">06</span><span class="rang-nom" style="color:#ae8a52">Brasier</span><span class="rang-arme attente">à venir</span></div>
-          <div class="rang"><span class="rang-num">07</span><span class="rang-nom" style="color:#bf9450">Phare</span><span class="rang-arme attente">à venir</span></div>
-          <div class="rang"><span class="rang-num">08</span><span class="rang-nom" style="color:#d09e4c">Aurore</span><span class="rang-arme attente">à venir</span></div>
-          <div class="rang"><span class="rang-num">09</span><span class="rang-nom" style="color:#e2a745">Zénith</span><span class="rang-arme attente">à venir</span></div>
-          <div class="rang"><span class="rang-num">10</span><span class="rang-nom" style="color:var(--ambre)">Candela</span><span class="rang-arme attente">à venir</span></div>
+          <div class="rang"><span class="rang-num">01</span><span class="rang-nom" style="color:#5f6468">Aveugle</span><span class="rang-arme">+ Le Parasite</span></div>
+          <div class="rang"><span class="rang-num">02</span><span class="rang-nom" style="color:#6e6a60">Braise</span><span class="rang-arme">+ Le Fumiste</span></div>
+          <div class="rang"><span class="rang-num">03</span><span class="rang-nom" style="color:#7d7059">Bougie</span><span class="rang-arme">+ L’Illusionniste</span></div>
+          <div class="rang"><span class="rang-num">04</span><span class="rang-nom" style="color:#8d7855">Lanterne</span><span class="rang-arme">+ Le Braconnier</span></div>
+          <div class="rang"><span class="rang-num">05</span><span class="rang-nom" style="color:#9d8153">Torche</span><span class="rang-arme">+ Le Terrassier</span></div>
+          <div class="rang"><span class="rang-num">06</span><span class="rang-nom" style="color:#ae8a52">Brasier</span><span class="rang-arme">+ L’Incendiaire</span></div>
+          <div class="rang"><span class="rang-num">07</span><span class="rang-nom" style="color:#bf9450">Phare</span><span class="rang-arme">+ La Sentinelle</span></div>
+          <div class="rang"><span class="rang-num">08</span><span class="rang-nom" style="color:#d09e4c">Aurore</span><span class="rang-arme">+ L’Occulteur</span></div>
+          <div class="rang"><span class="rang-num">09</span><span class="rang-nom" style="color:#e2a745">Zénith</span><span class="rang-arme">+ L’Allumeur</span></div>
+          <div class="rang"><span class="rang-num">10</span><span class="rang-nom" style="color:var(--ambre)">Candela</span><span class="rang-arme">+ Le Spectre</span></div>
         </div>
-        <p class="note-echelle">Les quatre premiers rangs ouvrent chacun une arme. <strong>Les six suivants n’ouvrent encore rien</strong> — le contenu qui les remplira est en chantier, et l’annoncer vaut mieux que de faire croire qu’un palier vide est un choix de conception.</p>
+        <p class="note-echelle">Le déblocage est <strong>cumulatif</strong> : un rang donne tout ce qui le précède, et non la seule classe qu’il ajoute. Un Lanterne dispose des quatre premières ; un Candela des dix. L’ordre suit l’échelle de la <strong>lumière</strong>, pas celle de la puissance — ce qui explique qui se trouve tout en haut.</p>
       </div>
     </div>
   </section>
@@ -459,7 +489,7 @@ html.js .vu .barre-trait { width: var(--w); }
           <div class="fiche-ligne"><span class="fiche-cle">Moteur</span><span>Godot 4.7 — images par seconde déplafonnées</span></div>
           <div class="fiche-ligne"><span class="fiche-cle">Réseau</span><span>Hôte-autoritaire, Epic Online Services — code de salon, traversée de NAT</span></div>
           <div class="fiche-ligne"><span class="fiche-cle">Langue</span><span>Français</span></div>
-          <div class="fiche-ligne"><span class="fiche-cle">Version</span><span>0.3.1 publiée · 0.4.0 en développement</span></div>
+          <div class="fiche-ligne"><span class="fiche-cle">Version</span><span>0.4.0, sortie le 9 septembre 2026</span></div>
         </div>
         <p class="pied">Candela est développé par une personne. Les fonds de cette page sont les planches de l’introduction du jeu ; les vues ci-dessus sont de véritables captures de partie. <a href="https://github.com/adrienvada/Candela-2D---Godot/releases/latest">Toutes les versions</a>.</p>
       </div>
