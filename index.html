@@ -312,15 +312,14 @@ html.js .vu .barre-trait { width: var(--w); }
 
 <div class="fond" aria-hidden="true">
   <div class="plan" data-scene="0" style="background-image:url('images/pl-descente.jpg')"></div>
-  <div class="plan" data-scene="1" style="background-image:url('images/pl-seuil.jpg')"></div>
-  <div class="plan" data-scene="2" style="background-image:url('images/pl-dotation.jpg')"></div>
-  <div class="plan" data-scene="3" style="background-image:url('images/pl-allumage.jpg')"></div>
-  <div class="plan" data-scene="4" style="background-image:url('images/pl-prix.jpg')"></div>
-  <div class="plan" data-scene="5" style="background-image:url('images/bg-duel.jpg')"></div>
-  <div class="plan" data-scene="6" style="background-image:url('images/fond_armes.jpg')"></div>
-  <div class="plan" data-scene="7" style="background-image:url('images/fond_rangs.jpg')"></div>
-  <div class="plan" data-scene="8" style="background-image:url('images/fond_telecharger.jpg')"></div>
-  <div class="plan" data-scene="9" style="background-image:url('images/pl-extinction.jpg')"></div>
+  <div class="plan" data-scene="1" style="background-image:url('images/fond_telecharger.jpg')"></div>
+  <div class="plan" data-scene="2" style="background-image:url('images/pl-seuil.jpg')"></div>
+  <div class="plan" data-scene="3" style="background-image:url('images/pl-prix.jpg')"></div>
+  <div class="plan" data-scene="4" style="background-image:url('images/bg-duel.jpg')"></div>
+  <div class="plan" data-scene="5" style="background-image:url('images/fond_armes.jpg')"></div>
+  <div class="plan" data-scene="6" style="background-image:url('images/fond_rangs.jpg')"></div>
+  <div class="plan" data-scene="7" style="background-image:url('images/pl-allumage.jpg')"></div>
+  <div class="plan" data-scene="8" style="background-image:url('images/pl-extinction.jpg')"></div>
   <div class="voile"></div>
   <div class="trame"></div>
   <div class="torche" id="torche"></div>
@@ -340,45 +339,61 @@ html.js .vu .barre-trait { width: var(--w); }
     </div>
   </section>
 
-  <!-- 1 — LE SEUIL -->
+  <!-- 8 — TÉLÉCHARGER -->
   <section class="scene" data-scene="1">
+    <div class="dedans">
+      <div class="case case-large anim">
+        <p class="recitatif">Jouer</p>
+        <div class="dl-tete"><h2>Télécharger</h2><span class="tampon">v0.3.1</span></div>
+        <div class="plateformes">
+          <a class="plateforme" href="https://github.com/adrienvada/Candela-2D---Godot/releases/latest/download/Candela-macos.zip">
+            <img class="glyphe" src="images/icone_macos.png" alt="">
+            <span><span class="plateforme-nom">macOS</span><br><span class="plateforme-fichier">Candela-macos.zip</span></span>
+            <svg class="fleche" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3 L12 16 M5 10 L12 17 L19 10 M4 21 L20 21"/></svg>
+          </a>
+          <a class="plateforme" href="https://github.com/adrienvada/Candela-2D---Godot/releases/latest/download/Candela-windows.zip">
+            <img class="glyphe" src="images/icone_windows.png" alt="">
+            <span><span class="plateforme-nom">Windows</span><br><span class="plateforme-fichier">Candela-windows.zip</span></span>
+            <svg class="fleche" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3 L12 16 M5 10 L12 17 L19 10 M4 21 L20 21"/></svg>
+          </a>
+        </div>
+        <div class="installe">
+          <h3>Première ouverture sur Mac</h3>
+          <p class="installe-intro">Candela n’est pas distribué par l’App Store, alors macOS demande votre accord une première fois. Quatre gestes, une seule fois dans la vie du jeu.</p>
+          <div class="etapes">
+            <div class="etape"><p>Ouvrez le fichier téléchargé, puis glissez <strong>Candela</strong> dans votre dossier <strong>Applications</strong>.</p></div>
+            <div class="etape"><p>Double-cliquez sur <strong>Candela</strong>. macOS refuse et affiche un avertissement : <em>c’est normal, et c’est ce qu’on va débloquer.</em> Cliquez sur <strong>Terminé</strong>.</p></div>
+            <div class="etape">
+              <p>Ouvrez <strong>Réglages Système → Confidentialité et sécurité</strong>, descendez jusqu’à la section <strong>Sécurité</strong> : une ligne parle de Candela. Cliquez sur <strong>Ouvrir quand même</strong>.</p>
+              <p class="mdp">Votre <strong>mot de passe Mac</strong> — ou Touch ID — vous sera demandé ici. C’est macOS qui le demande pour vous, pas le jeu : Candela ne le voit jamais.</p>
+            </div>
+            <div class="etape"><p>Une dernière fenêtre s’ouvre : cliquez sur <strong>Ouvrir</strong>.</p></div>
+          </div>
+          <p class="installe-fin">C’est fini. Les fois suivantes, Candela s’ouvre d’un simple double-clic, et se met à jour tout seul.</p>
+        </div>
+        <p class="dl-note">Les deux liens pointent vers la <strong>dernière version publiée</strong> : ils restent valables à chaque sortie. La 0.3.1 est sortie le 9 septembre 2026.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- 1 — LE SEUIL -->
+  <section class="scene" data-scene="2">
     <div class="dedans">
       <p class="lettrage anim">On ne sait pas <span class="amb">pourquoi</span> il est là.</p>
       <p class="sous-lettrage anim d1">Une porte en acier, un panneau rouillé où un seul mot reste lisible, et derrière, le noir. Candela ne raconte rien de plus : tout ce qui compte commence au moment où la porte se referme.</p>
     </div>
   </section>
 
-  <!-- 2 — LA DOTATION -->
-  <section class="scene" data-scene="2">
-    <div class="dedans">
-      <div class="case anim">
-        <p class="recitatif">La dotation</p>
-        <h2>Une torche.<br>Une arme.<br>Rien d’autre.</h2>
-        <div class="prose">
-          <p>Pas d’inventaire, pas de compétences, rien à préparer avant la partie. Deux objets, les mêmes pour les deux joueurs — et tout le jeu tient dans la façon dont vous vous servez du premier.</p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- 3 — L'ALLUMAGE -->
+  <!-- LE PACTE — les deux moitiés en une seule planche -->
   <section class="scene" data-scene="3">
     <div class="dedans">
-      <p class="lettrage anim">Éclairer,<br>c’est <span class="amb">voir</span>.</p>
-      <p class="sous-lettrage anim d1">Le faisceau révèle le béton, les douilles au sol, le sang séché des manches précédentes — et la silhouette de l’autre, s’il a le malheur d’entrer dedans.</p>
-    </div>
-  </section>
-
-  <!-- 4 — LE PRIX -->
-  <section class="scene" data-scene="4">
-    <div class="dedans">
-      <p class="lettrage a-droite anim">Éclairer,<br>c’est être <span class="amb">vu</span>.</p>
-      <p class="sous-lettrage a-droite anim d1">Le même cône dessine votre ombre sur le mur derrière vous, et se voit de l’autre bout de la carte. Chaque seconde de lumière est un renseignement que vous prenez et un renseignement que vous donnez. Les bons joueurs éteignent.</p>
+      <p class="lettrage anim">Éclairer,<br>c’est <span class="amb">voir</span>.<br>Éclairer,<br>c’est être <span class="amb">vu</span>.</p>
+      <p class="sous-lettrage anim d1">Le faisceau révèle le béton, les douilles, le sang séché des manches précédentes — et la silhouette de l’autre, s’il a le malheur d’entrer dedans. Mais le même cône dessine votre ombre sur le mur derrière vous, et se voit de l’autre bout de la carte. Chaque seconde de lumière est un renseignement que vous prenez et un renseignement que vous donnez. <strong>Les bons joueurs éteignent.</strong></p>
     </div>
   </section>
 
   <!-- 5 — LA RÈGLE -->
-  <section class="scene" data-scene="5">
+  <section class="scene" data-scene="4">
     <div class="dedans">
       <div class="case case-large anim">
         <p class="recitatif">La règle</p>
@@ -396,7 +411,7 @@ html.js .vu .barre-trait { width: var(--w); }
   </section>
 
   <!-- 6 — LES ARMES -->
-  <section class="scene" data-scene="6">
+  <section class="scene" data-scene="5">
     <div class="dedans">
       <div class="case case-large anim">
         <p class="recitatif">Quatre armes</p>
@@ -421,7 +436,7 @@ html.js .vu .barre-trait { width: var(--w); }
   </section>
 
   <!-- 7 — LES RANGS -->
-  <section class="scene" data-scene="7">
+  <section class="scene" data-scene="6">
     <div class="dedans">
       <div class="case case-large anim">
         <p class="recitatif">Compétitif</p>
@@ -460,45 +475,8 @@ html.js .vu .barre-trait { width: var(--w); }
     </div>
   </section>
 
-  <!-- 8 — TÉLÉCHARGER -->
-  <section class="scene" data-scene="8">
-    <div class="dedans">
-      <div class="case case-large anim">
-        <p class="recitatif">Jouer</p>
-        <div class="dl-tete"><h2>Télécharger</h2><span class="tampon">v0.3.1</span></div>
-        <div class="plateformes">
-          <a class="plateforme" href="https://github.com/adrienvada/Candela-2D---Godot/releases/latest/download/Candela-macos.zip">
-            <img class="glyphe" src="images/icone_macos.png" alt="">
-            <span><span class="plateforme-nom">macOS</span><br><span class="plateforme-fichier">Candela-macos.zip</span></span>
-            <svg class="fleche" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3 L12 16 M5 10 L12 17 L19 10 M4 21 L20 21"/></svg>
-          </a>
-          <a class="plateforme" href="https://github.com/adrienvada/Candela-2D---Godot/releases/latest/download/Candela-windows.zip">
-            <img class="glyphe" src="images/icone_windows.png" alt="">
-            <span><span class="plateforme-nom">Windows</span><br><span class="plateforme-fichier">Candela-windows.zip</span></span>
-            <svg class="fleche" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3 L12 16 M5 10 L12 17 L19 10 M4 21 L20 21"/></svg>
-          </a>
-        </div>
-        <div class="installe">
-          <h3>Première ouverture sur Mac</h3>
-          <p class="installe-intro">Candela n’est pas distribué par l’App Store, alors macOS demande votre accord une première fois. Quatre gestes, une seule fois dans la vie du jeu.</p>
-          <div class="etapes">
-            <div class="etape"><p>Ouvrez le fichier téléchargé, puis glissez <strong>Candela</strong> dans votre dossier <strong>Applications</strong>.</p></div>
-            <div class="etape"><p>Double-cliquez sur <strong>Candela</strong>. macOS refuse et affiche un avertissement : <em>c’est normal, et c’est ce qu’on va débloquer.</em> Cliquez sur <strong>Terminé</strong>.</p></div>
-            <div class="etape">
-              <p>Ouvrez <strong>Réglages Système → Confidentialité et sécurité</strong>, descendez jusqu’à la section <strong>Sécurité</strong> : une ligne parle de Candela. Cliquez sur <strong>Ouvrir quand même</strong>.</p>
-              <p class="mdp">Votre <strong>mot de passe Mac</strong> — ou Touch ID — vous sera demandé ici. C’est macOS qui le demande pour vous, pas le jeu : Candela ne le voit jamais.</p>
-            </div>
-            <div class="etape"><p>Une dernière fenêtre s’ouvre : cliquez sur <strong>Ouvrir</strong>.</p></div>
-          </div>
-          <p class="installe-fin">C’est fini. Les fois suivantes, Candela s’ouvre d’un simple double-clic, et se met à jour tout seul.</p>
-        </div>
-        <p class="dl-note">Les deux liens pointent vers la <strong>dernière version publiée</strong> : ils restent valables à chaque sortie. La 0.3.1 est sortie le 9 septembre 2026.</p>
-      </div>
-    </div>
-  </section>
-
   <!-- 9 — EN JEU, PUIS LA FIN -->
-  <section class="scene" data-scene="9">
+  <section class="scene" data-scene="8">
     <div class="dedans">
       <div class="case anim">
         <p class="recitatif">En jeu</p>
