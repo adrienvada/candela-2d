@@ -177,12 +177,19 @@ p { margin: 0; }
 .installe h3 { font-size: 1.2rem; margin-bottom: 0.4rem; }
 .installe-intro { color: var(--dim); font-size: 0.92rem; margin-bottom: 1.5rem; max-width: 56ch; }
 .etapes { display: flex; flex-direction: column; gap: 1.15rem; counter-reset: etape; }
-.etape { display: grid; grid-template-columns: 2.4rem 1fr; gap: 0.9rem; align-items: start; max-width: 62ch; }
+.etape { display: grid; grid-template-columns: 2.4rem 1fr; gap: 0.55rem 0.9rem; align-items: start; max-width: 62ch; }
 .etape::before {
   counter-increment: etape; content: counter(etape);
+  grid-column: 1; grid-row: 1;
   font-family: var(--display); font-weight: 800; font-size: 1.9rem; line-height: 0.85;
   color: var(--ambre); text-align: right;
 }
+/* ⚠️ SANS CETTE LIGNE, une étape à DEUX enfants casse. En grille, le second
+   enfant part dans la cellule suivante — donc sous le numéro, dans une colonne
+   large de 2,4 rem : un mot par ligne. C'est arrivé sur l'étape 3, la seule qui
+   porte un encadré en plus de son texte. Tous les enfants tiennent la colonne
+   du texte ; seul le numéro occupe la première. */
+.etape > * { grid-column: 2; }
 .etape p { font-size: 0.98rem; }
 .etape em { color: var(--dim); font-style: normal; }
 .etape strong { color: var(--halogene); font-weight: 600; }
