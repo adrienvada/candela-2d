@@ -108,6 +108,10 @@ html.js .plan.actif { opacity: 1; transform: scale(1) translateY(calc(var(--deri
    ========================================================================= */
 main { position: relative; z-index: 10; }
 .scene { min-height: 100svh; display: flex; align-items: center; padding: clamp(5rem, 12vh, 9rem) var(--marge); }
+/* La dernière scène ne porte que le film : pas de case, pas de titre, pas de
+   légende. Un trailer se regarde, il ne se présente pas. */
+.scene-film { min-height: 0; padding-block: clamp(3rem, 8vh, 6rem); }
+.scene-film .film { width: 100%; max-width: 78rem; margin-inline: auto; border: 2px solid var(--trait); }
 .dedans { width: 100%; max-width: 74rem; margin-inline: auto; }
 
 /* La case : cadre d'encre et repères de massicot, comme menu_comic_panel.gd. */
@@ -307,17 +311,20 @@ html.js .vu .barre-trait { width: var(--w); }
 /* =========================================================================
    LA VITRINE
    ========================================================================= */
-.vitrine { display: grid; grid-template-columns: repeat(6, 1fr); grid-auto-rows: clamp(6rem, 11.5vw, 10.5rem); gap: var(--gap); margin-top: 1.8rem; }
-.vue { overflow: hidden; background: var(--noir); }
-.vue img { display: block; width: 100%; height: 100%; object-fit: cover; transition: transform 800ms cubic-bezier(0.22,0.61,0.36,1), filter 400ms ease; }
-.vue:hover img { transform: scale(1.06); filter: brightness(1.2); }
-.c2 { grid-column: span 2; } .c3 { grid-column: span 3; } .c6 { grid-column: span 6; }
-.r2 { grid-row: span 2; }
-@media (max-width: 52rem) {
-  .vitrine { grid-template-columns: 1fr; grid-auto-rows: auto; }
-  .vue { aspect-ratio: 16 / 9; }
-  .c2, .c3, .c6, .r2 { grid-column: auto; grid-row: auto; }
-}
+/* --- Une capture EN FACE du texte -------------------------------------------
+   Les captures n'ont plus de section à elles : elles accompagnent ce qu'elles
+   illustrent. Une image de faisceau à côté du paragraphe qui parle du faisceau
+   vaut mieux qu'une galerie à la fin, que personne ne relie à rien. */
+.duo { display: grid; grid-template-columns: minmax(0, 1.05fr) minmax(0, 0.95fr); gap: clamp(1.2rem, 3vw, 2.6rem); align-items: center; }
+.duo > .case { max-width: none; }
+.duo .vue { overflow: hidden; background: var(--noir); border: 2px solid var(--trait-bas); aspect-ratio: 4 / 3; }
+.duo .vue img { display: block; width: 100%; height: 100%; object-fit: cover; transition: transform 800ms cubic-bezier(0.22,0.61,0.36,1), filter 400ms ease; }
+.duo .vue:hover img { transform: scale(1.05); filter: brightness(1.18); }
+@media (max-width: 62rem) { .duo { grid-template-columns: 1fr; } }
+
+/* Le duo : un bloc de texte et, en face, une capture de partie. C'est la
+   seule place que les captures ont encore — au contact de ce qu'elles montrent,
+   et non entassées en fin de page. */
 
 /* =========================================================================
    FICHE ET PIED
@@ -410,8 +417,13 @@ html.js .vu .barre-trait { width: var(--w); }
   <!-- LE PACTE — les deux moitiés en une seule planche -->
   <section class="scene" data-scene="3">
     <div class="dedans">
+      <div class="duo">
+        <div>
       <p class="lettrage anim">Éclairer,<br>c’est <span class="amb">voir</span>.<br>Éclairer,<br>c’est être <span class="amb">vu</span>.</p>
       <p class="sous-lettrage anim d1">Le faisceau révèle le béton, les douilles, le sang séché des manches précédentes — et la silhouette de l’autre, s’il a le malheur d’entrer dedans. Mais le même cône dessine votre ombre sur le mur derrière vous, et se voit de l’autre bout de la carte. Chaque seconde de lumière est un renseignement que vous prenez et un renseignement que vous donnez. <strong>Les bons joueurs éteignent.</strong></p>
+        </div>
+        <div class="vue anim d1"><img src="images/sig-05-torche.jpg" alt="Un cône de torche ouvert sur un sol de béton : tout ce qu’il n’atteint pas est noir."></div>
+      </div>
     </div>
   </section>
 
@@ -420,9 +432,14 @@ html.js .vu .barre-trait { width: var(--w); }
     <div class="dedans">
       <div class="case case-large anim">
         <p class="recitatif">Dix classes</p>
+        <div class="duo">
+          <div>
         <h2>Choisir une classe,<br>c’est choisir<br>comment on se trahit</h2>
         <div class="prose">
           <p>Chaque classe porte son arme, sa torche et son gadget — <strong>un seul par manche</strong>, posé devant soi, et destructible à la balle. Elles ne diffèrent pas d’abord par les dégâts : elles diffèrent par la quantité de vous-même qu’elles montrent au reste de la carte.</p>
+        </div>
+          </div>
+          <div class="vue anim d1"><img src="images/sig-07-flash-de-tir.jpg" alt="Un coup de feu dans le noir : la bouche de l’arme éclaire d’un coup toute la pièce, et le tireur avec."></div>
         </div>
         <figure class="figure">
           <div class="figure-titre">Portée du faisceau, en largeurs d’écran</div>
@@ -523,9 +540,14 @@ html.js .vu .barre-trait { width: var(--w); }
     <div class="dedans">
       <div class="case case-large anim">
         <p class="recitatif">Compétitif</p>
+        <div class="duo">
+          <div>
         <h2>Dix rangs,<br>de l’aveugle<br>à l’unité de lumière</h2>
         <div class="prose">
           <p>Le classement se compte en ELO et se nomme en lumière. On commence sans rien voir ; on finit par porter le nom de l’unité qui mesure l’intensité d’une bougie.</p>
+        </div>
+          </div>
+          <div class="vue anim d1"><img src="images/sig-06-retrodiffusion.jpg" alt="Deux faisceaux qui se recouvrent : la lumière de l’autre trahit sa position avant qu’on le voie."></div>
         </div>
         <div class="echelle">
           <div class="rang"><span class="rang-num">01</span><span class="rang-nom" style="color:#5f6468">Aveugle</span><span class="rang-arme">+ Le Parasite</span></div>
@@ -544,33 +566,9 @@ html.js .vu .barre-trait { width: var(--w); }
     </div>
   </section>
 
-  <!-- 9 — EN JEU, PUIS LA FIN -->
+  <!-- LA FIN -->
   <section class="scene" data-scene="6">
     <div class="dedans">
-      <div class="case anim">
-        <p class="recitatif">En jeu</p>
-        <h2>Ce que ça donne<br>dans le noir</h2>
-        <div class="prose"><p class="retrait">Captures de partie, sans retouche. La plus grande partie du cadre est vide — c’est le sujet.</p></div>
-      </div>
-      <div class="vitrine anim d1">
-        <div class="vue c6 r2"><img src="images/hero-duel.jpg" style="object-position:58% 50%" alt="Un cône de torche traverse le noir et révèle une silhouette sur un sol de béton."></div>
-        <div class="vue c2"><img src="images/sig-05-torche.jpg" style="object-position:62% 52%" alt="Un faisceau de torche seul, ouvert sur du carrelage de béton."></div>
-        <div class="vue c2"><img src="images/sig-06-retrodiffusion.jpg" style="object-position:62% 52%" alt="Deux cônes de lumière se recouvrent en partie dans l’obscurité."></div>
-        <div class="vue c2"><img src="images/sig-07-flash-de-tir.jpg" style="object-position:62% 52%" alt="Un tir touche : un nombre rouge apparaît près de la silhouette éclairée."></div>
-        <div class="vue c3 r2"><img src="images/gal-scinde.jpg" style="object-position:50% 45%" alt="Écran scindé : deux joueurs, trois faisceaux, une cloison centrale."></div>
-        <div class="vue c3"><img src="images/gal-fusee.jpg" style="object-position:56% 52%" alt="Une fusée éclairante rouge brûle au sol et colore une moitié du couloir."></div>
-        <div class="vue c3"><img src="images/gal-eblouissement.jpg" style="object-position:52% 50%" alt="Un éblouissement blanc envahit presque tout l’écran."></div>
-      </div>
-
-      <div class="case case-large anim d2" style="margin-top:2.4rem">
-        <p class="recitatif">Le film</p>
-        <h2>Quarante-deux<br>secondes</h2>
-        <div class="prose">
-          <p class="retrait">Les planches de l’introduction et des plans de jeu, en alternance. Rien n’y est monté d’ailleurs que du jeu lui-même.</p>
-        </div>
-        <div class="film"><video controls preload="none" poster="images/film-affiche.jpg"><source src="videos/film.mp4" type="video/mp4">Votre navigateur ne sait pas lire cette vidéo — <a href="videos/film.mp4">la télécharger</a>.</video></div>
-      </div>
-
       <div class="case case-large anim d2" style="margin-top:2.4rem">
         <p class="recitatif">Fiche</p>
         <div class="fiche">
@@ -586,6 +584,12 @@ html.js .vu .barre-trait { width: var(--w); }
         <p class="pied">Candela est développé par une personne. Les fonds de cette page sont les planches de l’introduction du jeu ; les vues ci-dessus sont de véritables captures de partie. <a href="https://github.com/adrienvada/Candela-2D---Godot/releases/latest">Toutes les versions</a>.</p>
       </div>
     </div>
+  </section>
+
+
+  <!-- LE FILM — plein cadre, et pas un mot autour -->
+  <section class="scene scene-film" data-scene="6">
+    <div class="film anim"><video controls preload="none" poster="images/film-affiche.jpg"><source src="videos/film.mp4" type="video/mp4">Votre navigateur ne sait pas lire cette vidéo — <a href="videos/film.mp4">la télécharger</a>.</video></div>
   </section>
 
 </main>
@@ -672,7 +676,11 @@ html.js .vu .barre-trait { width: var(--w); }
     for (var i = 0; i < animes.length; i++) {
       var r = animes[i].getBoundingClientRect();
       // Marge basse : une case entre en scène un peu avant d'être à l'écran.
-      if (r.top < vue * 0.94 && r.bottom > 0) {
+      // ⚠️ Pas de borne haute. Exiger `r.bottom > 0` laisserait invisible pour
+      // toujours tout ce qu'un saut d'ancre, une restauration de position ou un
+      // défilement rapide aurait franchi sans s'y arrêter — c'est le défaut
+      // « on ne voit que les illustrations », signalé deux fois par Adrien.
+      if (r.top < vue * 0.94) {
         animes[i].classList.add("vu");
       } else {
         restants.push(animes[i]);
