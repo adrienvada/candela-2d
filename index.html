@@ -224,6 +224,20 @@ html.js .vu .barre-trait { width: var(--w); }
 /* Les deux qui portent plus loin qu'elles ne voient se signalent : c'est la
    seule propriété de ce tableau qui change la façon de jouer CONTRE elles. */
 .classe.loin { border-top-color: var(--ambre); }
+/* Les grandeurs : chiffres alignés, libellés effacés. On les consulte, on ne
+   les lit pas — la phrase au-dessus a déjà dit ce qu'il fallait comprendre. */
+.stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(4.6rem, 1fr)); gap: 0.4rem 0.7rem; margin-top: 0.7rem; }
+.stats div { display: flex; flex-direction: column; gap: 0.05rem; }
+.stats dt { font-family: var(--data); font-size: 0.58rem; letter-spacing: 0.1em; text-transform: uppercase; color: #6b7278; }
+.stats dd { margin: 0; font-family: var(--data); font-size: 0.82rem; font-variant-numeric: tabular-nums; color: var(--halogene); }
+.stats dd em { font-style: normal; color: var(--ambre); }
+.gadget { margin-top: 0.75rem; padding-top: 0.6rem; border-top: 1px dotted var(--trait-bas); font-size: 0.85rem; color: var(--dim); }
+.gadget b { font-family: var(--display); font-weight: 800; font-size: 1rem; text-transform: uppercase; letter-spacing: 0.03em; color: var(--halogene); display: block; margin-bottom: 0.15rem; }
+.gadget i { font-style: normal; color: #8d7855; }
+/* Le flash n'est pas un axe, c'est une exception : deux classes seulement ne
+   s'allument pas en tirant. En gradient il ne rangerait rien — sept classes
+   sont à 1,00. En annotation, il dit quelque chose. */
+.muet { display: inline-block; margin-top: 0.5rem; font-family: var(--data); font-size: 0.6rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--noir); background: var(--ambre); padding: 0.12rem 0.45rem 0.16rem; }
 
 /* =========================================================================
    L'ÉCHELLE DES RANGS
@@ -399,7 +413,7 @@ html.js .vu .barre-trait { width: var(--w); }
         <p class="recitatif">Dix classes</p>
         <h2>Choisir une classe,<br>c’est choisir<br>comment on se trahit</h2>
         <div class="prose">
-          <p>Chaque classe porte son arme, sa torche et son gadget. Elles ne diffèrent pas d’abord par les dégâts : elles diffèrent par la quantité de vous-même qu’elles montrent au reste de la carte.</p>
+          <p>Chaque classe porte son arme, sa torche et son gadget — <strong>un seul par manche</strong>, posé devant soi, et destructible à la balle. Elles ne diffèrent pas d’abord par les dégâts : elles diffèrent par la quantité de vous-même qu’elles montrent au reste de la carte.</p>
         </div>
         <figure class="figure">
           <div class="figure-titre">Portée du faisceau, en largeurs d’écran</div>
@@ -417,19 +431,79 @@ html.js .vu .barre-trait { width: var(--w); }
             <div class="barre"><div class="barre-nom">Sentinelle</div><div class="barre-piste"><div class="barre-trait" style="--w:74.3%"></div><div class="barre-val" style="left:74.3%">1,39 <span class="barre-detail">fusil à verrou</span></div></div></div>
             <div class="barre"><div class="barre-nom">Braconnier</div><div class="barre-piste"><div class="barre-trait" style="--w:100.0%"></div><div class="barre-val" style="left:100%; transform:translate(-100%,-50%); padding-right:0.55rem; padding-left:0; color:var(--noir); font-weight:500;">1,87</div></div></div>
           </div>
-          <p class="figure-note"><strong>Deux classes éclairent plus loin qu’elles ne voient</strong>, et elles ne le paient pas de la même façon : le Braconnier paie en <strong>silence</strong> — son arbalète n’émet aucun flash — et la Sentinelle paie en <strong>temps</strong>, près d’une seconde entre deux coups.</p>
+          <p class="figure-note"><strong>Deux classes éclairent plus loin qu’elles ne voient</strong>, et aucune des deux ne l’a gratuitement. Le Braconnier paie en <strong>immobilité</strong> — 0,60 s cloué au sol après chaque tir, le maximum du jeu — la Sentinelle en <strong>cadence</strong>, 0,85 s entre deux coups. Et une seule des deux est silencieuse.</p>
         </figure>
         <div class="classes">
-          <div class="classe"><span class="classe-nom">Le Parasite</span><span class="classe-arme">pistolet</span><p>Tire vite et voit large, mais chaque coup le désigne. Il ne se cache pas : il corrompt la lampe des autres.</p></div>
-          <div class="classe"><span class="classe-nom">Le Fumiste</span><span class="classe-arme">pistolet lourd</span><p>Trois balles lourdes et un rideau de suie. Il ne disparaît pas, il devient <em>quelqu’un</em> — on voit qu’il y a un corps, jamais lequel.</p></div>
-          <div class="classe"><span class="classe-nom">L’Illusionniste</span><span class="classe-arme">fusil</span><p>Un faisceau fin et net, et un corps posé au sol qui n’est pas le sien. Ce qu’il révèle de lui est faux.</p></div>
-          <div class="classe loin"><span class="classe-nom">Le Braconnier</span><span class="classe-arme">arbalète</span><p>Il voit deux fois plus loin que l’écran et son arme ne fait aucune lumière — mais il reste immobile après chaque tir. Il paie sa discrétion en <strong>temps</strong>.</p></div>
-          <div class="classe"><span class="classe-nom">Le Terrassier</span><span class="classe-arme">pompe</span><p>Le faisceau le plus large du jeu : il voit tout autour de lui et rien devant. Il se signale en permanence, et lève la poussière pour que ça ne serve à personne.</p></div>
-          <div class="classe"><span class="classe-nom">L’Incendiaire</span><span class="classe-arme">fusil de détresse</span><p>Deux cartouches, deux fusées, un sol qu’on ne traverse plus. Il ne cherche pas à être invisible : il rend le terrain inhabitable.</p></div>
-          <div class="classe loin"><span class="classe-nom">La Sentinelle</span><span class="classe-arme">fusil à verrou</span><p>Elle voit plus loin que tout le monde sauf le Braconnier, et met près d’une seconde entre deux tirs. Elle ne cherche pas — elle relit les traces de qui est passé.</p></div>
-          <div class="classe"><span class="classe-nom">L’Occulteur</span><span class="classe-arme">pistolet-mitrailleur</span><p>Une rafale courte, un flash faible, et une découpe d’acier qui projette l’ombre d’un homme absent. Il ment avec <strong>l’obscurité</strong>.</p></div>
-          <div class="classe"><span class="classe-nom">L’Allumeur</span><span class="classe-arme">carabine double</span><p>La lumière maximale : deux fusées, une mine au magnésium, aucune ombre où se mettre. Il se montre pour que personne ne puisse se cacher.</p></div>
-          <div class="classe"><span class="classe-nom">Le Spectre</span><span class="classe-arme">pistolet silencieux</span><p>Aucune fusée, aucun flash, une arme silencieuse — et une bâche qui arrête la lumière sans arrêter les balles. Il ne révèle rien, et n’a presque rien pour tuer.</p></div>
+          <div class="classe">
+            <span class="classe-nom">Le Parasite</span>
+            <span class="classe-arme">Pistolet</span>
+            <p>Tire vite et voit large, mais chaque coup le désigne. Il ne se cache pas : il corrompt la lampe des autres.</p>
+            <dl class="stats"><div><dt>Dégâts</dt><dd>50 / 25</dd></div><div><dt>Cadence</dt><dd>0,16 s</dd></div><div><dt>Immobilisation</dt><dd>0,10 s</dd></div><div><dt>Chargeur</dt><dd>10</dd></div><div><dt>Recharge</dt><dd>2,2 s</dd></div><div><dt>Cône</dt><dd>70°</dd></div><div><dt>Portée</dt><dd>0,85 éc.</dd></div><div><dt>Fusées</dt><dd>1</dd></div></dl>
+            <p class="gadget"><b>Le grésillement</b>Fait sauter les lampes torches autour de lui : le faisceau papillote et tombe à 22 %. <i>Rayon 240 px, 14 s — il ne s’éteint jamais tout à fait.</i></p>
+          </div>
+          <div class="classe">
+            <span class="classe-nom">Le Fumiste</span>
+            <span class="classe-arme">Pistolet lourd</span>
+            <p>Trois balles lourdes et un rideau de suie. Il ne disparaît pas, il devient <em>quelqu’un</em> — on voit qu’il y a un corps, jamais lequel.</p>
+            <dl class="stats"><div><dt>Dégâts</dt><dd>70 / 45</dd></div><div><dt>Cadence</dt><dd>0,42 s</dd></div><div><dt>Immobilisation</dt><dd>0,30 s</dd></div><div><dt>Chargeur</dt><dd>3</dd></div><div><dt>Recharge</dt><dd>2,8 s</dd></div><div><dt>Cône</dt><dd>60°</dd></div><div><dt>Portée</dt><dd>0,80 éc.</dd></div><div><dt>Fusées</dt><dd>1</dd></div></dl>
+            <p class="gadget"><b>La cartouche de suie</b>Un rideau dense : dedans, un corps n’est plus qu’une masse. <i>Rayon 92 px, 9 s — n’arrête ni les balles ni la lumière.</i></p>
+          </div>
+          <div class="classe">
+            <span class="classe-nom">L’Illusionniste</span>
+            <span class="classe-arme">Fusil</span>
+            <p>Un faisceau fin et net, et un corps posé au sol qui n’est pas le sien. Ce qu’il révèle de lui est faux.</p>
+            <dl class="stats"><div><dt>Dégâts</dt><dd>50 / 25</dd></div><div><dt>Cadence</dt><dd>0,24 s</dd></div><div><dt>Immobilisation</dt><dd>0,25 s</dd></div><div><dt>Chargeur</dt><dd>24</dd></div><div><dt>Recharge</dt><dd>3,5 s</dd></div><div><dt>Cône</dt><dd>20°</dd></div><div><dt>Portée</dt><dd>0,96 éc.</dd></div><div><dt>Fusées</dt><dd>1</dd></div></dl>
+            <p class="gadget"><b>Le leurre inerte</b>Un corps qui n’est pas là : même silhouette, même trou dans la lumière. <i>Une seule balle suffit à le défaire. 18 s, immobile et muet.</i></p>
+          </div>
+          <div class="classe loin">
+            <span class="classe-nom">Le Braconnier</span>
+            <span class="classe-arme">Arbalète</span>
+            <p>Il voit deux fois plus loin que l’écran et son arme ne fait aucune lumière — mais il reste cloué au sol après chaque tir, le plus longtemps du jeu.</p><span class="muet">Presque aucun flash</span>
+            <dl class="stats"><div><dt>Dégâts</dt><dd>80 / 80</dd></div><div><dt>Cadence</dt><dd>0,30 s</dd></div><div><dt>Immobilisation</dt><dd><em>0,60 s</em></dd></div><div><dt>Chargeur</dt><dd>1</dd></div><div><dt>Recharge</dt><dd>4,5 s</dd></div><div><dt>Cône</dt><dd>10°</dd></div><div><dt>Portée</dt><dd><em>1,87 éc.</em></dd></div><div><dt>Fusées</dt><dd>1</dd></div></dl>
+            <p class="gadget"><b>La torche fantôme</b>Une lampe posée qui balaie ±36° en 3,6 s avec le faisceau de sa classe — et aveugle comme une vraie. <i>16 s, et elle s’abat à la balle.</i></p>
+          </div>
+          <div class="classe">
+            <span class="classe-nom">Le Terrassier</span>
+            <span class="classe-arme">Pompe</span>
+            <p>Le faisceau le plus large du jeu : il voit tout autour de lui et rien devant. Il se signale en permanence, et lève la poussière pour que ça ne serve à personne.</p>
+            <dl class="stats"><div><dt>Dégâts</dt><dd>5 × 20 / 15</dd></div><div><dt>Cadence</dt><dd>0,90 s</dd></div><div><dt>Immobilisation</dt><dd>0,35 s</dd></div><div><dt>Chargeur</dt><dd>6</dd></div><div><dt>Recharge</dt><dd>5,6 s</dd></div><div><dt>Cône</dt><dd><em>120°</em></dd></div><div><dt>Portée</dt><dd>0,53 éc.</dd></div><div><dt>Fusées</dt><dd>3</dd></div></dl>
+            <p class="gadget"><b>La poussière</b>Large et mince : personne ne voit loin, tout le monde voit un peu. <i>Rayon 168 px, 7,5 s.</i></p>
+          </div>
+          <div class="classe">
+            <span class="classe-nom">L’Incendiaire</span>
+            <span class="classe-arme">Fusil de détresse</span>
+            <p>Deux cartouches, deux fusées, un sol qu’on ne traverse plus. Il ne cherche pas à être invisible : il rend le terrain inhabitable.</p>
+            <dl class="stats"><div><dt>Dégâts</dt><dd>55 / 35</dd></div><div><dt>Cadence</dt><dd>0,55 s</dd></div><div><dt>Immobilisation</dt><dd>0,40 s</dd></div><div><dt>Chargeur</dt><dd>2</dd></div><div><dt>Recharge</dt><dd>3,2 s</dd></div><div><dt>Cône</dt><dd>80°</dd></div><div><dt>Portée</dt><dd>0,75 éc.</dd></div><div><dt>Fusées</dt><dd>2</dd></div></dl>
+            <p class="gadget"><b>La nappe de braises</b>Un sol qu’on ne traverse plus : 16 points de vie par seconde. <i>Rayon 68 px, 10 s — et elle brûle son poseur aussi.</i></p>
+          </div>
+          <div class="classe loin">
+            <span class="classe-nom">La Sentinelle</span>
+            <span class="classe-arme">Fusil à verrou</span>
+            <p>Elle voit plus loin que tout le monde sauf le Braconnier, et met près d’une seconde entre deux tirs. Elle ne cherche pas — elle relit les traces de qui est passé.</p>
+            <dl class="stats"><div><dt>Dégâts</dt><dd>75 / 60</dd></div><div><dt>Cadence</dt><dd><em>0,85 s</em></dd></div><div><dt>Immobilisation</dt><dd>0,50 s</dd></div><div><dt>Chargeur</dt><dd>2</dd></div><div><dt>Recharge</dt><dd>4,0 s</dd></div><div><dt>Cône</dt><dd>16°</dd></div><div><dt>Portée</dt><dd><em>1,39 éc.</em></dd></div><div><dt>Fusées</dt><dd>1</dd></div></dl>
+            <p class="gadget"><b>La poudre de contact</b>Écrit les pas de qui passe, une marque tous les 26 px. <i>Dure toute la manche — mais les traces ne se voient que sous une lumière.</i></p>
+          </div>
+          <div class="classe">
+            <span class="classe-nom">L’Occulteur</span>
+            <span class="classe-arme">Pistolet-mitrailleur</span>
+            <p>Une rafale courte, un flash faible, et une découpe d’acier qui projette l’ombre d’un homme absent. Il ment avec <strong>l’obscurité</strong>.</p><span class="muet">Flash affaibli</span>
+            <dl class="stats"><div><dt>Dégâts</dt><dd>26 / 16</dd></div><div><dt>Cadence</dt><dd>0,09 s</dd></div><div><dt>Immobilisation</dt><dd>0,15 s</dd></div><div><dt>Chargeur</dt><dd>8</dd></div><div><dt>Recharge</dt><dd>2,6 s</dd></div><div><dt>Cône</dt><dd>50°</dd></div><div><dt>Portée</dt><dd>0,69 éc.</dd></div><div><dt>Fusées</dt><dd>1</dd></div></dl>
+            <p class="gadget"><b>L’ombre habitée</b>Une plaque d’acier de 36 px qui projette l’ombre d’un homme qui n’est pas là. <i>Dure toute la manche, et elle arrête les balles.</i></p>
+          </div>
+          <div class="classe">
+            <span class="classe-nom">L’Allumeur</span>
+            <span class="classe-arme">Carabine double</span>
+            <p>La lumière maximale : deux fusées, une mine au magnésium, aucune ombre où se mettre. Il se montre pour que personne ne puisse se cacher.</p>
+            <dl class="stats"><div><dt>Dégâts</dt><dd>60 / 40</dd></div><div><dt>Cadence</dt><dd>0,20 s</dd></div><div><dt>Immobilisation</dt><dd>0,20 s</dd></div><div><dt>Chargeur</dt><dd>2</dd></div><div><dt>Recharge</dt><dd>2,4 s</dd></div><div><dt>Cône</dt><dd>90°</dd></div><div><dt>Portée</dt><dd>0,64 éc.</dd></div><div><dt>Fusées</dt><dd>2</dd></div></dl>
+            <p class="gadget"><b>La mine au magnésium</b>Elle ne blesse pas : elle aveugle. 1,6 s de magnésium sur 460 px. <i>Armement 1,2 s, rayon 72 px — et elle ne distingue pas son poseur.</i></p>
+          </div>
+          <div class="classe">
+            <span class="classe-nom">Le Spectre</span>
+            <span class="classe-arme">Pistolet silencieux</span>
+            <p>Aucune fusée, aucun flash, une arme silencieuse — et une bâche qui arrête la lumière sans arrêter les balles. Il ne révèle rien, et n’a presque rien pour tuer.</p><span class="muet">Aucun flash</span>
+            <dl class="stats"><div><dt>Dégâts</dt><dd>45 / 30</dd></div><div><dt>Cadence</dt><dd>0,22 s</dd></div><div><dt>Immobilisation</dt><dd><em>0,08 s</em></dd></div><div><dt>Chargeur</dt><dd>4</dd></div><div><dt>Recharge</dt><dd>2,6 s</dd></div><div><dt>Cône</dt><dd>40°</dd></div><div><dt>Portée</dt><dd>0,75 éc.</dd></div><div><dt>Fusées</dt><dd><em>0</em></dd></div></dl>
+            <p class="gadget"><b>Le voile</b>Arrête la lumière sans arrêter les balles : 168 px de bâche. <i>Dure toute la manche — deux balles la déchirent.</i></p>
+          </div>
         </div>
       </div>
     </div>
