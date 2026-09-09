@@ -189,11 +189,6 @@ p { margin: 0; }
 /* =========================================================================
    LES TROIS SIGNAUX
    ========================================================================= */
-.signaux { display: grid; grid-template-columns: repeat(auto-fit, minmax(13rem, 1fr)); gap: 1.5rem var(--gap); margin-top: 1.9rem; }
-.signal { padding-top: 0.9rem; border-top: 2px solid var(--ambre); display: flex; flex-direction: column; gap: 0.45rem; }
-.signal:nth-child(2) { border-top-color: var(--halogene); }
-.signal:nth-child(3) { border-top-color: #8c2b31; }
-.signal p { color: var(--dim); font-size: 0.92rem; }
 
 /* =========================================================================
    LE GRAPHIQUE DES PORTÉES
@@ -233,11 +228,6 @@ html.js .vu .barre-trait { width: var(--w); }
    Ce qui n'est pas encore téléchargeable vit dans un bloc qui ne ressemble à
    aucun autre : trait discontinu, récitatif inversé. Un lecteur doit savoir
    qu'il lit une promesse sans avoir à lire la phrase qui le dit. */
-.a-venir { border-style: dashed; border-color: #8d7855; }
-.a-venir .recitatif { background: #8d7855; color: var(--noir); border-color: #8d7855; }
-.a-venir h2 { color: #d9c39a; }
-.a-venir .prose p { color: var(--dim); }
-.a-venir strong { color: var(--halogene); font-weight: 600; }
 
 /* =========================================================================
    TÉLÉCHARGEMENT
@@ -315,11 +305,9 @@ html.js .vu .barre-trait { width: var(--w); }
   <div class="plan" data-scene="1" style="background-image:url('images/fond_telecharger.jpg')"></div>
   <div class="plan" data-scene="2" style="background-image:url('images/pl-seuil.jpg')"></div>
   <div class="plan" data-scene="3" style="background-image:url('images/pl-prix.jpg')"></div>
-  <div class="plan" data-scene="4" style="background-image:url('images/bg-duel.jpg')"></div>
-  <div class="plan" data-scene="5" style="background-image:url('images/fond_armes.jpg')"></div>
-  <div class="plan" data-scene="6" style="background-image:url('images/fond_rangs.jpg')"></div>
-  <div class="plan" data-scene="7" style="background-image:url('images/pl-allumage.jpg')"></div>
-  <div class="plan" data-scene="8" style="background-image:url('images/pl-extinction.jpg')"></div>
+  <div class="plan" data-scene="4" style="background-image:url('images/fond_armes.jpg')"></div>
+  <div class="plan" data-scene="5" style="background-image:url('images/fond_rangs.jpg')"></div>
+  <div class="plan" data-scene="6" style="background-image:url('images/pl-extinction.jpg')"></div>
   <div class="voile"></div>
   <div class="trame"></div>
   <div class="torche" id="torche"></div>
@@ -392,26 +380,8 @@ html.js .vu .barre-trait { width: var(--w); }
     </div>
   </section>
 
-  <!-- 5 — LA RÈGLE -->
-  <section class="scene" data-scene="4">
-    <div class="dedans">
-      <div class="case case-large anim">
-        <p class="recitatif">La règle</p>
-        <h2>La seule information<br>est la lumière</h2>
-        <div class="prose">
-          <p>Il n’y a pas de mini-carte, pas de marqueur d’ennemi, pas de contour rouge dans le noir. Un mur bloque la lumière comme il bloque une balle : la torche s’arrête où le décor s’arrête, et ce que vous n’éclairez pas n’existe pas.</p>
-        </div>
-        <div class="signaux">
-          <div class="signal"><h3>La torche</h3><p>Le faisceau que vous tenez. Il vous montre le terrain, et vous désigne de très loin.</p></div>
-          <div class="signal"><h3>La rétrodiffusion</h3><p>Ce que la lumière de l’autre laisse sur les murs autour de vous. On sait qu’il est là avant de le voir — parfois.</p></div>
-          <div class="signal"><h3>Le flash de tir</h3><p>Une image de votre position, imprimée dans le noir une fraction de seconde. Tirer, c’est parler.</p></div>
-        </div>
-      </div>
-    </div>
-  </section>
-
   <!-- 6 — LES ARMES -->
-  <section class="scene" data-scene="5">
+  <section class="scene" data-scene="4">
     <div class="dedans">
       <div class="case case-large anim">
         <p class="recitatif">Quatre armes</p>
@@ -436,7 +406,7 @@ html.js .vu .barre-trait { width: var(--w); }
   </section>
 
   <!-- 7 — LES RANGS -->
-  <section class="scene" data-scene="6">
+  <section class="scene" data-scene="5">
     <div class="dedans">
       <div class="case case-large anim">
         <p class="recitatif">Compétitif</p>
@@ -461,22 +431,8 @@ html.js .vu .barre-trait { width: var(--w); }
     </div>
   </section>
 
-  <!-- 7 bis — CE QUI VIENT -->
-  <section class="scene" data-scene="7">
-    <div class="dedans">
-      <div class="case case-large a-venir anim">
-        <p class="recitatif">Pas encore dans le jeu</p>
-        <h2>Dix classes<br>asymétriques</h2>
-        <div class="prose">
-          <p>Un chantier en cours remplace les quatre armes communes par <strong>dix classes</strong>, une par rang, chacune échangeant de la visibilité contre du pouvoir : voir plus loin en restant immobile après le tir, disparaître au prix de ne presque plus pouvoir tuer, ou s’exposer pour que personne ne puisse se cacher. Le déblocage devient <strong>cumulatif</strong> — un rang donne tout ce qui le précède — et les six paliers vides de l’échelle ci-dessus se remplissent.</p>
-          <p><strong>Rien de tout cela n’est dans la version téléchargeable.</strong> Les chiffres ne sont pas figés, les classes n’ont pas encore été jouées manette en main, et cette page ne les annoncera comme jouables que le jour où un fichier les contiendra.</p>
-        </div>
-      </div>
-    </div>
-  </section>
-
   <!-- 9 — EN JEU, PUIS LA FIN -->
-  <section class="scene" data-scene="8">
+  <section class="scene" data-scene="6">
     <div class="dedans">
       <div class="case anim">
         <p class="recitatif">En jeu</p>
