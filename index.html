@@ -578,10 +578,9 @@ html.js .vu .barre-trait { width: var(--w); }
   var doux = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
   var racine = document.documentElement;
 
-  // ⚠️ `js` autorise le masquage du texte. Elle n'est donc posée QUE si l'on
-  // sait pouvoir le démasquer : sans IntersectionObserver, on n'anime rien
-  // plutôt que de cacher une page qu'on ne saura pas rouvrir.
-  if (typeof IntersectionObserver === "undefined") { return; }
+  // `js` autorise le masquage du texte. La révélation ne dépend plus que de
+  // `getBoundingClientRect`, présent partout — il n'y a plus de capacité à
+  // tester avant de masquer.
   racine.classList.add("js");
 
   // ⚠️ ET UN CHIEN DE GARDE. C'est la leçon la plus chère de cette page : elle
@@ -597,6 +596,17 @@ html.js .vu .barre-trait { width: var(--w); }
   var chienDeGarde = setTimeout(function () {
     if (!document.querySelector(".anim.vu")) { racine.classList.remove("js"); }
   }, 1500);
+
+  // Second filet, sur la DURÉE : si un élément a été révélé mais que d'autres
+  // restent cachés longtemps après le dernier geste du lecteur, on rend tout.
+  // Le premier chien de garde ne voyait que le cas « rien n'est apparu » — or
+  // la panne réelle a été « la première scène est apparue, et plus rien ».
+  setTimeout(function () {
+    var caches = document.querySelectorAll(".anim:not(.vu)");
+    if (caches.length && window.scrollY > 0) {
+      Array.prototype.forEach.call(caches, function (n) { n.classList.add("vu"); });
+    }
+  }, 6000);
 
   var plans = Array.prototype.slice.call(document.querySelectorAll(".plan"));
   var scenes = Array.prototype.slice.call(document.querySelectorAll(".scene"));
@@ -622,29 +632,41 @@ html.js .vu .barre-trait { width: var(--w); }
 
   // Les entrées en scène. `unobserve` après coup : ce qui est apparu reste
   // apparu — une page qui rejoue ses animations en remontant est fatigante.
-  var observateurAnim = new IntersectionObserver(function (entrees, obs) {
-    entrees.forEach(function (e) {
-      if (e.isIntersecting) {
-        clearTimeout(chienDeGarde);
-        e.target.classList.add("vu");
-        obs.unobserve(e.target);
-      }
-    });
-  }, { threshold: 0.12, rootMargin: "0px 0px -6% 0px" });
-
-  // Ce qui est DÉJÀ à l'écran ne passe pas par l'observateur : on le révèle
-  // tout de suite, en mesurant. La première scène ne doit rien attendre — c'est
-  // elle que voient une vignette de partage et un lecteur pressé.
+  // ⚠️ AUCUN OBSERVATEUR ICI, ET C'EST DÉLIBÉRÉ.
+  //
+  // La révélation reposait sur un `IntersectionObserver`. Il ne s'est pas
+  // déclenché, DEUX FOIS, en ligne, et la seconde fois la page n'affichait plus
+  // rien après la première scène. La cause n'a pas été établie — mesurée, elle
+  // ne tenait ni au seuil ni à la hauteur des cases — et c'est précisément pour
+  // ça qu'on ne la cherche plus : **le contenu ne doit pas dépendre d'un
+  // mécanisme dont on ne sait pas prédire le déclenchement.**
+  //
+  // Un balayage de position fait le même travail, en dix lignes, sans aucune
+  // sémantique à connaître : ce qui est dans la fenêtre est révélé. Il tourne
+  // au défilement (déjà limité par requestAnimationFrame), au redimensionnement,
+  // et trois fois après le chargement — les polices et les images déplacent la
+  // mise en page bien après `DOMContentLoaded`.
   var animes = Array.prototype.slice.call(document.querySelectorAll(".anim"));
-  animes.forEach(function (n) {
-    var r = n.getBoundingClientRect();
-    if (r.top < window.innerHeight && r.bottom > 0) {
-      clearTimeout(chienDeGarde);
-      n.classList.add("vu");
-    } else {
-      observateurAnim.observe(n);
+  function balayer() {
+    if (animes.length === 0) { return; }
+    var vue = window.innerHeight || document.documentElement.clientHeight;
+    var restants = [];
+    for (var i = 0; i < animes.length; i++) {
+      var r = animes[i].getBoundingClientRect();
+      // Marge basse : une case entre en scène un peu avant d'être à l'écran.
+      if (r.top < vue * 0.94 && r.bottom > 0) {
+        animes[i].classList.add("vu");
+      } else {
+        restants.push(animes[i]);
+      }
     }
-  });
+    animes = restants;
+  }
+  balayer();
+  window.addEventListener("resize", balayer, { passive: true });
+  setTimeout(balayer, 250);
+  setTimeout(balayer, 900);
+  setTimeout(balayer, 2500);
 
   // Jauge et dérive du fond, dans une seule boucle d'animation.
   var enAttente = false;
@@ -656,6 +678,7 @@ html.js .vu .barre-trait { width: var(--w); }
       var h = document.documentElement.scrollHeight - window.innerHeight;
       var p = h > 0 ? window.scrollY / h : 0;
       jauge.style.width = (p * 100).toFixed(2) + "%";
+      balayer();
       if (!doux) { fond.style.setProperty("--derive", ((window.scrollY % 1000) / 1000).toFixed(3)); }
     });
   }
