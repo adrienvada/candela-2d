@@ -472,9 +472,27 @@ html.js .vu .barre-trait { width: var(--w); }
 (function () {
   "use strict";
   var doux = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-  // La classe `js` autorise le masquage. Posée seulement ici : sans script, la
-  // page reste entièrement lisible et le premier fond reste affiché.
-  document.documentElement.classList.add("js");
+  var racine = document.documentElement;
+
+  // ⚠️ `js` autorise le masquage du texte. Elle n'est donc posée QUE si l'on
+  // sait pouvoir le démasquer : sans IntersectionObserver, on n'anime rien
+  // plutôt que de cacher une page qu'on ne saura pas rouvrir.
+  if (typeof IntersectionObserver === "undefined") { return; }
+  racine.classList.add("js");
+
+  // ⚠️ ET UN CHIEN DE GARDE. C'est la leçon la plus chère de cette page : elle
+  // s'est affichée EN LIGNE avec ses sept illustrations et pas une ligne de
+  // texte, parce que l'observateur ne s'était pas déclenché. Un observateur qui
+  // ne part pas — page non rendue, onglet en arrière-plan, cadre imbriqué,
+  // moteur qui diffère la première passe — laissait tout le contenu à
+  // `opacity: 0`, sans la moindre erreur de console.
+  //
+  // Une animation est un ENRICHISSEMENT : son échec ne doit jamais coûter le
+  // contenu. Si rien n'est apparu au bout d'une seconde et demie, on retire
+  // `js` et la page redevient celle de quelqu'un qui n'exécute pas de script.
+  var chienDeGarde = setTimeout(function () {
+    if (!document.querySelector(".anim.vu")) { racine.classList.remove("js"); }
+  }, 1500);
 
   var plans = Array.prototype.slice.call(document.querySelectorAll(".plan"));
   var scenes = Array.prototype.slice.call(document.querySelectorAll(".scene"));
@@ -502,10 +520,27 @@ html.js .vu .barre-trait { width: var(--w); }
   // apparu — une page qui rejoue ses animations en remontant est fatigante.
   var observateurAnim = new IntersectionObserver(function (entrees, obs) {
     entrees.forEach(function (e) {
-      if (e.isIntersecting) { e.target.classList.add("vu"); obs.unobserve(e.target); }
+      if (e.isIntersecting) {
+        clearTimeout(chienDeGarde);
+        e.target.classList.add("vu");
+        obs.unobserve(e.target);
+      }
     });
   }, { threshold: 0.12, rootMargin: "0px 0px -6% 0px" });
-  Array.prototype.forEach.call(document.querySelectorAll(".anim"), function (n) { observateurAnim.observe(n); });
+
+  // Ce qui est DÉJÀ à l'écran ne passe pas par l'observateur : on le révèle
+  // tout de suite, en mesurant. La première scène ne doit rien attendre — c'est
+  // elle que voient une vignette de partage et un lecteur pressé.
+  var animes = Array.prototype.slice.call(document.querySelectorAll(".anim"));
+  animes.forEach(function (n) {
+    var r = n.getBoundingClientRect();
+    if (r.top < window.innerHeight && r.bottom > 0) {
+      clearTimeout(chienDeGarde);
+      n.classList.add("vu");
+    } else {
+      observateurAnim.observe(n);
+    }
+  });
 
   // Jauge et dérive du fond, dans une seule boucle d'animation.
   var enAttente = false;
